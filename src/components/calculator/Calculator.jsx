@@ -33,7 +33,7 @@ const Calculator = () => {
       "result",
       +amount !== 0
         ? +amount / 300 + +localStorage.getItem("result").substring(0, 6)
-        : localStorage.getItem("result").substring(0, 6)
+        : localStorage.getItem("result")?.substring(0, 6)
     );
     setResult(localStorage.getItem("result"));
   }, [trigger]);
@@ -63,7 +63,7 @@ const Calculator = () => {
                   Deposit
                 </label>
                 <input
-                  type="text"
+                  type="number"
                   placeholder="Enter your amount in naira"
                   value={amount}
                   onChange={(e) => setAmount(e.target.value)}
@@ -80,7 +80,7 @@ const Calculator = () => {
                   You deposit
                 </label>
                 <input
-                  type="text"
+                  type="number"
                   placeholder="Enter your name"
                   value={calAmount}
                   onChange={(e) => setCalcAmount(e.target.value)}
@@ -94,7 +94,7 @@ const Calculator = () => {
                   type="email"
                   placeholder="Enter your email"
                   value={calResult}
-                  onChnage={(e) => setCalResult(e.tagert.value)}
+                  readOnly="readonly"
                 />
               </div>
             </form>
