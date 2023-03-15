@@ -22,6 +22,8 @@ const Navbar = () => {
                     {/* <li><Link to='/recovery'>Recovery</Link> </li> */}
                     <li><Link to='/cloud'>E-naira</Link></li>
                     <li><Link to='/contact'>Contact</Link></li>
+                    <li><Link to='/dashboard'>Dashboard</Link></li>
+
                     <button>Sign in</button>
                 </ul>
                 <div className="hamburger" onClick={handleNav}>

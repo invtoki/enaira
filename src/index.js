@@ -8,6 +8,7 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import Recovery from './routes/RecoveryPage'
 import CloudPage from './routes/CloudPage'
 import ContactPage from './routes/ContactPage'
+import DashboardPage from './routes/DashboardPage';
 
 ReactDOM.render(
   <BrowserRouter>
@@ -16,6 +17,7 @@ ReactDOM.render(
       <Route path='/recovery' element={<Recovery />} />
       <Route path='/cloud' element={<CloudPage />} />
       <Route path='/contact' element={<ContactPage />} />
+      <Route path='/dashboard' element={<DashboardPage />} />
     </Routes>
   </BrowserRouter>,
   document.getElementById('root')
