@@ -8,14 +8,36 @@ const Calculator = () => {
   const [trigger, setTrigger] = useState(0);
   const [calAmount, setCalcAmount] = useState("");
   const [calResult, setCalResult] = useState("");
+
+  const [error, setError] = useState("");
+
+  const [naira, setNaira] = useState(300);
+  const [eAmount , setEAmount] = useState('')
+
+  const depositNaira = (event) => {
+        event.preventDefault()
+        if(+eAmount <  +result){
+            setNaira(prev => prev + +eAmount * 300)
+            localStorage.setItem("result" , +localStorage.getItem("result") - +eAmount  )  
+            setTrigger((prev) => prev + 1);
+        }else{
+            setError('insufficient balance')
+        }
+  };
+
   const deposit = (event) => {
     event.preventDefault();
-    localStorage.setItem(
-      "result",
-      +amount / 300 + +localStorage.getItem("result").substring(0, 6)
-    );
-    setTrigger((prev) => prev + 1);
-    setAmount("");
+    if (+amount < +naira) {
+      localStorage.setItem(
+        "result",
+        +amount / 300 + +localStorage.getItem("result").substring(0, 6)
+      );
+      setTrigger((prev) => prev + 1);
+      setAmount("");
+      setNaira(prev => prev - +amount)
+    } else {
+      setError("insufficient balance");
+    }
   };
 
   const calculate = useRef(() => {});
@@ -32,8 +54,8 @@ const Calculator = () => {
     localStorage.setItem(
       "result",
       +amount !== 0
-        ? +amount / 300 + +localStorage.getItem("result").substring(0, 6)
-        : localStorage.getItem("result").substring(0, 6)
+        ? +amount / 300 + +localStorage.getItem("result")?.substring(0, 6)
+        : localStorage.getItem("result")?.substring(0, 6)
     );
     setResult(localStorage.getItem("result"));
   }, [trigger]);
@@ -55,23 +77,41 @@ const Calculator = () => {
           >
             <form action="">
               <h1>
-                <span>Dashboard</span> <br /> Avaialable Balance: {result}
+                <span>Dashboard</span> <br /> Naira Balance: {naira}
               </h1>
 
               <div>
                 <label style={{ display: "block", fontSize: "20px" }}>
-                  Deposit
+                  Change Naira to E-naira
                 </label>
                 <input
-                  type="text"
-                  placeholder="Enter your amount in naira"
+                  type="number"
+                  placeholder=""
                   value={amount}
                   onChange={(e) => setAmount(e.target.value)}
                 />
               </div>
               <button onClick={deposit}>Submit</button>
             </form>
-            <form>
+            <form action="">
+              <h1>
+                <span></span> <br /> E-Naira Balance: {result}
+              </h1>
+
+              <div>
+                <label style={{ display: "block", fontSize: "20px" }}>
+                    Change E-naria to Naira
+                </label>
+                <input
+                  type="number"
+                  placeholder="Enter your amount in naira"
+                  value={eAmount}
+                  onChange={(e) => setEAmount(e.target.value)}
+                />
+              </div>
+              <button onClick={depositNaira}>Submit</button>
+            </form>
+            {/* <form>
               <h1>
                 <span>Calculator</span>
               </h1>
@@ -80,7 +120,7 @@ const Calculator = () => {
                   You deposit
                 </label>
                 <input
-                  type="text"
+                  type="number"
                   placeholder="Enter your name"
                   value={calAmount}
                   onChange={(e) => setCalcAmount(e.target.value)}
@@ -91,13 +131,13 @@ const Calculator = () => {
                   You get
                 </label>
                 <input
-                  type="email"
+                  type="number"
                   placeholder="Enter your email"
                   value={calResult}
-                  onChnage={(e) => setCalResult(e.tagert.value)}
+                  readOnly="readonly"
                 />
               </div>
-            </form>
+            </form> */}
           </div>
         </div>
       </div>
