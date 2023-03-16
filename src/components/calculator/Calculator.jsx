@@ -9,7 +9,7 @@ const Calculator = () => {
   const [calAmount, setCalcAmount] = useState("");
   const [calResult, setCalResult] = useState("");
 
-  const [error, setError] = useState("");
+  const [error, setError] = useState(null);
 
   const [naira, setNaira] = useState(300);
   const [eAmount , setEAmount] = useState('')
@@ -20,6 +20,7 @@ const Calculator = () => {
             setNaira(prev => prev + +eAmount * 300)
             localStorage.setItem("result" , +localStorage.getItem("result") - +eAmount  )  
             setTrigger((prev) => prev + 1);
+            setError(null)
         }else{
             setError('insufficient balance')
         }
@@ -35,6 +36,7 @@ const Calculator = () => {
       setTrigger((prev) => prev + 1);
       setAmount("");
       setNaira(prev => prev - +amount)
+      setError(null)
     } else {
       setError("insufficient balance");
     }
@@ -93,6 +95,7 @@ const Calculator = () => {
               </div>
               <button onClick={deposit}>Submit</button>
             </form>
+            {error &&  <p>{error} </p>}
             <form action="">
               <h1>
                 <span></span> <br /> E-Naira Balance: {result}
