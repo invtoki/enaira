@@ -132,7 +132,7 @@ const Calculator = () => {
               <div>
                 <label style={{ display: "block", fontSize: "20px" }}>
                   You get
-                </label>
+                </labelll>
                 <input
                   type="number"
                   placeholder="Enter your email"
